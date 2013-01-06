@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <title>Cat Heads or Tails</title>        
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.2.0.min.css" />
+		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-1.2.0.min.js"></script>
+        <script type="text/javascript" src="js/cordova-2.2.0.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <style>
+        	.center-wrapper { text-align: center; }
+			.center-wrapper * { margin: 0 auto; }
+        	#resultImage { margin: 0 auto; padding-top: 10px; padding-bottom: 4px; }
+        	#loading { display: none; margin-top: 100px; margin-bottom: 50px; }
+			#coin { max-width: 95%; max-height: 80%; }
+			#resultText { font-weight: bold; font-size: 15pt; padding: 8px; }
+			#flipCoinControl { padding-top: 4px; }
+			#flipCoinButton { height: 45px; font-weight: bold; font-size: 32px; }
+		</style>
+    <body>
+    <div data-role="page">
+		<div data-role="header">
+			<h1>Cat Heads Or Tails</h1>
+		</div>
+
+		<div data-role="content app">
+			<div id="resultImage" class="center-wrapper">
+				<div id="loading">
+					<img id="loadingImage" src="img/loading.gif" alt="Please Wait..."/>
+				</div>
+				<div id="coin">	
+					<img id="coinImage" src="img/cat_splash.jpg" alt="Heads or Tails?"/>
+				</div>
+			</div>
+			<div id="resultText" class="center-wrapper">
+				Heads or Tails?
+			</div>
+			<div id="flipCoinControl" class="center-wrapper">
+				<a id="flipCoinButton" href="javascript:flipCoin();" data-role="button" data-icon="star">Flip Coin</a>
+			</div>
+		</div>
+	</div>
+	
+    <script type="text/javascript">
+        app.initialize();
+        
+        function flipCoin() {
+        	$('#coin').hide();
+        	$('#loading').show();
+			$('#resultText').text('Flipping Coin...');
+			$('#flipCoinControl').hide();
+        	
+			setTimeout(function() {         	
+				var num = Math.floor(Math.random()*2);				
+				if (num === 0) {
+					$('#coinImage').attr('src', 'img/heads.jpg');
+					$('#coinImage').attr('alt', 'Heads');
+					$('#resultText').text('Heads');
+				}
+				else {
+					$('#coinImage').attr('src', 'img/tails.jpg');
+					$('#coinImage').attr('alt', 'Tails');
+					$('#resultText').text('Tails');			
+				}
+				$('#loading').hide();
+				$('#coin').show();
+				$('#flipCoinControl').show();
+			}, 1500);
+        }
+    </script>
+
+    </body>
+</html>
